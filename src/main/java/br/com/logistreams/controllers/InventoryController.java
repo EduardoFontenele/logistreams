@@ -14,6 +14,6 @@ public class InventoryController {
 
     @GetMapping
     public ResponseEntity<String> listInventories() {
-        return ResponseEntity.ok("Sexo anal");
+        return ResponseEntity.ok("I'm working");
     }
 }
