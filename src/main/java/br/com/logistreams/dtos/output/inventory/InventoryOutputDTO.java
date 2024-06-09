@@ -1,6 +1,6 @@
 package br.com.logistreams.dtos.output.inventory;
 
-import br.com.logistreams.dtos.output.section.OutputSectionDTO;
+import br.com.logistreams.dtos.output.section.SectionOutputDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OutputInventoryDTO {
-    List<OutputSectionDTO> sections;
+public class InventoryOutputDTO {
+    private String name;
+    List<SectionOutputDTO> sections;
 }

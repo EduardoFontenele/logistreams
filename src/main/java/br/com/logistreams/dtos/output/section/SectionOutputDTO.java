@@ -1,4 +1,4 @@
 package br.com.logistreams.dtos.output.section;
 
-public class OutputSectionDTO {
+public class SectionOutputDTO {
 }
