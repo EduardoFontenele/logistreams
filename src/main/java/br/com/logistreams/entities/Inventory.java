@@ -32,5 +32,5 @@ public class Inventory {
 
     @OneToMany
     @JoinColumn(name = "inventory_id")
-    private Set<ItemSection> itemSections = new HashSet<>();
+    private Set<Section> sections = new HashSet<>();
 }
