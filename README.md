@@ -14,7 +14,7 @@ LogiStreams is a RESTful API built with Spring Boot for managing streams of logi
 
  1. Clone the repository:
     ```
-    git clone <repository-url>
+    git clone https://github.com/EduardoFontenele/logistreams/tree/master
     ```
 
  2. Build the project:
