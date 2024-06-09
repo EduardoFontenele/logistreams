@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/logistreams?useSSL=false&serverTimezone=UTC
+    username: root
+    password: admin
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true

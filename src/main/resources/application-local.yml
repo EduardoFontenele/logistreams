@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    # Optional: initialize the database with schema and data files
+    schema: classpath:schema-h2.sql
+    data: classpath:data-h2.sql
+  h2:
+    console:
+      enabled: true  # Enable H2 console for web access
+      path: /h2-console  # Console path
+
+  jpa:
+    hibernate:
+      ddl-auto: validate  # Use 'create', 'create-drop', 'validate', 'none', or 'update'
+    show-sql: true  # Show SQL statements in the log
+
