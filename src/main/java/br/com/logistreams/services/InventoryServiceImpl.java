@@ -7,6 +7,8 @@ import br.com.logistreams.mappers.InventoryMapper;
 import br.com.logistreams.repositories.InventoryRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,8 +27,11 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public List<InventoryOutputDTO> listAll() {
-        List<Inventory> inventoryList = inventoryRepository.findAll();
+    public List<InventoryOutputDTO> listAll(int pageNumber, int pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
+
+        List<Inventory> inventoryList = inventoryRepository.findAll(pageRequest).getContent();
+
         return inventoryMapper.toInventoryOutputDTOList(inventoryList);
     }
 

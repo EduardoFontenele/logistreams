@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface InventoryService {
     void createNewInventory(InventoryInputDTO inventoryInputDTO);
-    List<InventoryOutputDTO> listAll();
+    List<InventoryOutputDTO> listAll(int pageNumber, int pageSize);
     void deleteById(int id);
     InventoryOutputDTO findById(int id);
     InventoryOutputDTO updateInventory(int id, InventoryInputDTO inventoryInputDTO);
