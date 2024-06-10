@@ -1,5 +1,6 @@
 package br.com.logistreams.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Inventory {
     @Column(columnDefinition = "VARCHAR(255) NOT NULL")
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "inventory_id")
     private Set<Section> sections = new HashSet<>();
 }
