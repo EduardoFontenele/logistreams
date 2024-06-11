@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class Meta {
+    private int currentPage;
     private int totalPages;
     private int totalRecords;
 }

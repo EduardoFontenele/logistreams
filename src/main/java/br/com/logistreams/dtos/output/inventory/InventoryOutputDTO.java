@@ -1,6 +1,7 @@
 package br.com.logistreams.dtos.output.inventory;
 
-import br.com.logistreams.dtos.output.section.SectionOutputDTO;
+import br.com.logistreams.dtos.output.OutputDTO;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,8 +15,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class InventoryOutputDTO {
+@JsonPropertyOrder({"id", "name", "sections", "_links"})
+public class InventoryOutputDTO extends OutputDTO {
     private int id;
     private String name;
-    Set<SectionOutputDTO> sections;
 }

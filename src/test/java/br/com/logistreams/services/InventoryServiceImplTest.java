@@ -1,11 +1,13 @@
 package br.com.logistreams.services;
 
+import br.com.logistreams.controllers.InventoryController;
 import br.com.logistreams.dtos.input.inventory.InventoryInputDTO;
 import br.com.logistreams.dtos.output.PagedResponse;
 import br.com.logistreams.dtos.output.inventory.InventoryOutputDTO;
 import br.com.logistreams.entities.Inventory;
 import br.com.logistreams.mappers.InventoryMapper;
 import br.com.logistreams.repositories.InventoryRepository;
+import br.com.logistreams.utils.PageLinksBuilder;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,6 +40,9 @@ class InventoryServiceImplTest {
     @Mock
     private InventoryMapper inventoryMapper;
 
+    @Mock
+    private PageLinksBuilder<Inventory> pageLinksBuilder;
+
     @InjectMocks
     private InventoryServiceImpl inventoryService;
 
@@ -62,7 +67,7 @@ class InventoryServiceImplTest {
     void test2() {
         //given
         Inventory inventory = new Inventory(1, "Camisas", new HashSet<>());
-        InventoryOutputDTO inventoryOutputDTO = new InventoryOutputDTO(1,"Camisas", new HashSet<>());
+        InventoryOutputDTO inventoryOutputDTO = new InventoryOutputDTO(1,"Camisas");
         List<Inventory> inventoryList = List.of(inventory);
         List<InventoryOutputDTO> inventoryOutputDTOList = List.of(inventoryOutputDTO);
         PageRequest pageRequest = PageRequest.of(0, 5);
@@ -103,7 +108,7 @@ class InventoryServiceImplTest {
     void test4() {
         //given
         Inventory inventory = new Inventory(1, "Camisas", new HashSet<>());
-        InventoryOutputDTO inventoryOutputDTO = new InventoryOutputDTO(1, "Camisas", new HashSet<>());
+        InventoryOutputDTO inventoryOutputDTO = new InventoryOutputDTO(1, "Camisas");
 
         //when
         given(inventoryRepository.findById(1)).willReturn(Optional.of(inventory));
@@ -114,7 +119,6 @@ class InventoryServiceImplTest {
 
         assertNotNull(result);
         assertEquals("Camisas", result.getName());
-        assertEquals(0, result.getSections().size());
     }
 
     @Test
@@ -141,7 +145,7 @@ class InventoryServiceImplTest {
         updatedInventory.setId(inventoryId);
         updatedInventory.setName("Updated Name");
 
-        InventoryOutputDTO updatedInventoryDTO = new InventoryOutputDTO(1, "Updated Name", new HashSet<>());
+        InventoryOutputDTO updatedInventoryDTO = new InventoryOutputDTO(1, "Updated Name");
 
         given(inventoryRepository.findById(inventoryId)).willReturn(Optional.of(existingInventory));
         given(inventoryRepository.save(existingInventory)).willReturn(updatedInventory);
