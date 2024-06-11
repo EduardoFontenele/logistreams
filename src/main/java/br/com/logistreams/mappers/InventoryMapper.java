@@ -29,10 +29,7 @@ public abstract class InventoryMapper {
         }
         return result;
     }
-
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "sections", target = "sections", ignore = true)
+    
     public InventoryOutputDTO toInventoryOutputDTO(Inventory inventory) {
         InventoryOutputDTO result = new InventoryOutputDTO();
         Map<String, Object> links = new HashMap<>();
