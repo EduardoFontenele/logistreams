@@ -1,11 +1,12 @@
 package br.com.logistreams.controllers;
 
 import br.com.logistreams.dtos.input.inventory.InventoryInputDTO;
+import br.com.logistreams.dtos.output.PagedResponse;
 import br.com.logistreams.dtos.output.inventory.InventoryOutputDTO;
 import br.com.logistreams.services.InventoryService;
-import br.com.logistreams.utils.ValidatePageParams;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,14 +29,12 @@ public class InventoryController {
     private final InventoryService inventoryService;
 
     @GetMapping
-    public ResponseEntity<List<InventoryOutputDTO>> listInventories(
+    public ResponseEntity<PagedResponse<InventoryOutputDTO>> listInventories(
             @RequestParam(value = "page_size", required = false) Integer pageSize,
-            @RequestParam(required = false) Integer pageNumber
+            @RequestParam(value = "page_number", required = false) Integer pageNumber
     ) {
-        int queryPageNumber = ValidatePageParams.validatePageNumber(pageNumber);
-        int queryPageSize = ValidatePageParams.validatePageSize(pageSize);
-        List<InventoryOutputDTO> result = inventoryService.listAll(queryPageNumber, queryPageSize);
-        return ResponseEntity.ok(result);
+        PagedResponse<InventoryOutputDTO> response = inventoryService.listAll(pageNumber, pageSize);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping

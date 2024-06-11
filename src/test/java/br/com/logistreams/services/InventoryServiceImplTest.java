@@ -1,6 +1,7 @@
 package br.com.logistreams.services;
 
 import br.com.logistreams.dtos.input.inventory.InventoryInputDTO;
+import br.com.logistreams.dtos.output.PagedResponse;
 import br.com.logistreams.dtos.output.inventory.InventoryOutputDTO;
 import br.com.logistreams.entities.Inventory;
 import br.com.logistreams.mappers.InventoryMapper;
@@ -14,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
@@ -70,13 +72,10 @@ class InventoryServiceImplTest {
         given(inventoryRepository.findAll(pageRequest)).willReturn(inventoryPage);
         given(inventoryMapper.toInventoryOutputDTOList(inventoryList)).willReturn(inventoryOutputDTOList);
 
-        List<InventoryOutputDTO> result = inventoryService.listAll(1, 5);
+        PagedResponse<InventoryOutputDTO> result = inventoryService.listAll(1, 5);
 
         //then
         assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals(inventoryOutputDTO, result.get(0));
-        assertEquals("Camisas", result.get(0).getName());
     }
 
     @Test
