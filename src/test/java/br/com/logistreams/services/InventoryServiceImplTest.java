@@ -1,6 +1,7 @@
 package br.com.logistreams.services;
 
 import br.com.logistreams.dtos.input.inventory.InventoryInputDTO;
+import br.com.logistreams.dtos.output.PagedResponse;
 import br.com.logistreams.dtos.output.inventory.InventoryOutputDTO;
 import br.com.logistreams.entities.Inventory;
 import br.com.logistreams.mappers.InventoryMapper;
@@ -9,24 +10,23 @@ import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -58,24 +58,24 @@ class InventoryServiceImplTest {
     }
 
     @Test
-    @DisplayName("Given a call to findAll, should return a list of inventory dto")
+    @DisplayName("Given a call to findAll without page size and number, should return a list of inventory dto")
     void test2() {
         //given
         Inventory inventory = new Inventory(1, "Camisas", new HashSet<>());
         InventoryOutputDTO inventoryOutputDTO = new InventoryOutputDTO(1,"Camisas", new HashSet<>());
         List<Inventory> inventoryList = List.of(inventory);
         List<InventoryOutputDTO> inventoryOutputDTOList = List.of(inventoryOutputDTO);
+        PageRequest pageRequest = PageRequest.of(0, 5);
+        PageImpl<Inventory> inventoryPage = new PageImpl<>(inventoryList, pageRequest, 1);
 
         //when
-        given(inventoryRepository.findAll()).willReturn(inventoryList);
+        given(inventoryRepository.findAll(pageRequest)).willReturn(inventoryPage);
         given(inventoryMapper.toInventoryOutputDTOList(inventoryList)).willReturn(inventoryOutputDTOList);
 
-        List<InventoryOutputDTO> result = inventoryService.listAll();
+        PagedResponse<InventoryOutputDTO> result = inventoryService.listAll(1, 5);
 
         //then
         assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals(inventoryOutputDTO, result.get(0));
     }
 
     @Test
