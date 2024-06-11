@@ -6,6 +6,8 @@ LogiStreams is a RESTful API built with Spring Boot for managing streams of logi
 
 - Spring Boot: Framework for building Java applications.
 - Spring Web: Provides HTTP request handling.
+- Spring HATEOAS: Provides an easy way to implement HATEOAS on REST APIs
+- Mapstruct: useful lib for mapping between classes
 - Jakarta Validation: Provides bean validation support.
 - H2 Database: In-memory database for testing.
 - MySQL: Relational database for production use.
