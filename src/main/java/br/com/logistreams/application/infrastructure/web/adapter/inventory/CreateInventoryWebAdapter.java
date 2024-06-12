@@ -14,7 +14,8 @@ public class CreateInventoryWebAdapter implements CreateInventoryOutputPort {
 
     @Override
     public void execute(Inventory inventory) {
-        InventoryEntity inventoryEntity = new InventoryEntity(null, inventory.getName());
+        InventoryEntity inventoryEntity = new InventoryEntity();
+        inventoryEntity.setName(inventory.getName());
         inventoryRepository.save(inventoryEntity);
     }
 }

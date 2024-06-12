@@ -3,7 +3,7 @@ CREATE SCHEMA logistreams;
 USE logistreams;
 
 DROP TABLE IF EXISTS items;
-DROP TABLE IF EXISTS items_section;
+DROP TABLE IF EXISTS sections;
 DROP TABLE IF EXISTS inventories;
 
 CREATE TABLE inventories (
@@ -11,7 +11,7 @@ CREATE TABLE inventories (
     name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE items_section (
+CREATE TABLE sections (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     inventory_id INT NOT NULL,
@@ -25,5 +25,5 @@ CREATE TABLE items (
     price DECIMAL(10, 2) NOT NULL,
     stock_quantity INT NOT NULL,
     section_id INT NOT NULL,
-    FOREIGN KEY (section_id) REFERENCES items_section(id)
+    FOREIGN KEY (section_id) REFERENCES sections(id)
 );
