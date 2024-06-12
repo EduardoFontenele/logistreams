@@ -1,4 +1,4 @@
-package br.com.logistreams.dtos.input.inventory;
+package br.com.logistreams.application.dto.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class InventoryInputDTO {
+public class InventoryOutputDTO {
     private String name;
 }

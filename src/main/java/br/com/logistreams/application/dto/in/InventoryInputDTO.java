@@ -1,4 +1,4 @@
-package br.com.logistreams.dtos.output;
+package br.com.logistreams.application.dto.in;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,8 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Meta {
-    private int currentPage;
-    private int totalPages;
-    private int totalRecords;
+public class InventoryInputDTO {
+    private String name;
 }

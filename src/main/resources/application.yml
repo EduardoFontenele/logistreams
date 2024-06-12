@@ -2,4 +2,4 @@ spring:
   application:
     name: logistreams
   profiles:
-      active: mysql
+      active: local
