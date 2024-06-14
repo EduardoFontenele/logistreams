@@ -1,6 +1,7 @@
 package br.com.logistreams.application.infrastructure.web.adapter.inventory;
 
 import br.com.logistreams.application.infrastructure.web.exception.BusinessLogicException;
+import br.com.logistreams.application.infrastructure.web.exception.ErrorsEnum;
 import br.com.logistreams.domain.entity.Inventory;
 import br.com.logistreams.domain.ports.output.inventory.CreateInventoryOutputPort;
 import br.com.logistreams.application.infrastructure.persistence.jpa.entity.InventoryEntity;
@@ -18,7 +19,7 @@ public class CreateInventoryWebAdapter implements CreateInventoryOutputPort {
     @Override
     public void execute(Inventory inventory) {
         if(inventoryRepository.existsByName(inventory.getName())) {
-            throw new BusinessLogicException(HttpStatus.CONFLICT, String.format("Resource with name '%s' already exists", inventory.getName()));
+            throw new BusinessLogicException(ErrorsEnum.RESOURCE_ALREADY_EXISTS);
         }
 
         InventoryEntity inventoryEntity = new InventoryEntity();
