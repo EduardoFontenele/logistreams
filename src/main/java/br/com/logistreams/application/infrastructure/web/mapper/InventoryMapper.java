@@ -1,6 +1,6 @@
 package br.com.logistreams.application.infrastructure.web.mapper;
 
-import br.com.logistreams.application.infrastructure.web.dto.input.inventory.InventoryInputDTO;
+import br.com.logistreams.application.infrastructure.web.dto.input.InventoryInputDTO;
 import br.com.logistreams.domain.entity.Inventory;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
