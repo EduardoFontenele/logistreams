@@ -1,7 +1,6 @@
 package br.com.logistreams.application.infrastructure.web.dto.input;
 
 import br.com.logistreams.application.infrastructure.web.exception.DefaultMessages;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -16,8 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class InventoryInputDTO {
-    @NotBlank(message = DefaultMessages.NOT_EMPTY)
-    @NotEmpty
+    @NotEmpty(message = DefaultMessages.NOT_EMPTY)
     @Size(max = 255, message = DefaultMessages.SIZE_EXCEEDED)
     private String name;
 }

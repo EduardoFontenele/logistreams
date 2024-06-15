@@ -1,5 +1,6 @@
 package br.com.logistreams.application.infrastructure.persistence.jpa.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +32,7 @@ public class InventoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "VARCHAR(255) NOT NULL UNIQUE")
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

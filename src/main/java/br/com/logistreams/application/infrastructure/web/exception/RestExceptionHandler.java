@@ -15,7 +15,7 @@ public class RestExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handle(MethodArgumentNotValidException ex) {
         ErrorResponse validationErrorResponse = new ErrorResponse();
-        validationErrorResponse.setHttpStatus(ErrorsEnum.INVALID_FIELDS.getHttpStatus());
+        validationErrorResponse.setHttpStatus(ErrorsEnum.INVALID_FIELDS.getHttpStatus().getReasonPhrase());
         validationErrorResponse.setErrorMessage(ErrorsEnum.INVALID_FIELDS.getErrorMessage());
         Map<String, String> validationErrors = new HashMap<>();
 
@@ -25,16 +25,16 @@ public class RestExceptionHandler {
 
         validationErrorResponse.setFields(validationErrors);
 
-        return ResponseEntity.status(validationErrorResponse.httpStatus.value()).body(validationErrorResponse);
+        return ResponseEntity.status(ErrorsEnum.INVALID_FIELDS.getHttpStatus().value()).body(validationErrorResponse);
     }
 
     @ExceptionHandler(BusinessLogicException.class)
     public ResponseEntity<ErrorResponse> handle(BusinessLogicException ex) {
         ErrorResponse validationErrorResponse = ErrorResponse.builder()
-                .httpStatus(ErrorsEnum.RESOURCE_ALREADY_EXISTS.getHttpStatus())
+                .httpStatus(ErrorsEnum.RESOURCE_ALREADY_EXISTS.getHttpStatus().getReasonPhrase())
                 .errorMessage(ErrorsEnum.RESOURCE_ALREADY_EXISTS.getErrorMessage())
                 .build();
 
-        return ResponseEntity.status(validationErrorResponse.httpStatus.value()).body(validationErrorResponse);
+        return ResponseEntity.status(ErrorsEnum.RESOURCE_ALREADY_EXISTS.getHttpStatus().value()).body(validationErrorResponse);
     }
 }
