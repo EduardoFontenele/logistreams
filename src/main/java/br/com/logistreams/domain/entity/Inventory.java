@@ -4,6 +4,11 @@ import java.util.Set;
 
 public class Inventory {
     private Long id;
+
+    public Inventory(String name) {
+        this.name = name;
+    }
+
     private String name;
     private Set<Section> sections;
 

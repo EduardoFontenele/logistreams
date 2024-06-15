@@ -1,5 +1,7 @@
 package br.com.logistreams.application.infrastructure.web.exception;
 
+import br.com.logistreams.utils.LoggerService;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,6 +13,7 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
+    private final LoggerService loggerService = new LoggerService(LoggerFactory.getLogger(RestExceptionHandler.class));
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handle(MethodArgumentNotValidException ex) {
@@ -24,7 +27,7 @@ public class RestExceptionHandler {
         }
 
         validationErrorResponse.setFields(validationErrors);
-
+        loggerService.validationError(validationErrors);
         return ResponseEntity.status(ErrorsEnum.INVALID_FIELDS.getHttpStatus().value()).body(validationErrorResponse);
     }
 
