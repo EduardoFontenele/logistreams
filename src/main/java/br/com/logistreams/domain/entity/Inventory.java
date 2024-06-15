@@ -1,18 +1,18 @@
 package br.com.logistreams.domain.entity;
 
-import java.util.List;
+import java.util.Set;
 
 public class Inventory {
     private Long id;
     private String name;
-    private List<Section> sections;
+    private Set<Section> sections;
 
     public Inventory(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Inventory(Long id, String name, List<Section> sections) {
+    public Inventory(Long id, String name, Set<Section> sections) {
         this.id = id;
         this.name = name;
         this.sections = sections;
@@ -37,11 +37,11 @@ public class Inventory {
         this.name = name;
     }
 
-    public List<Section> getSections() {
+    public Set<Section> getSections() {
         return sections;
     }
 
-    public void setSections(List<Section> sections) {
+    public void setSections(Set<Section> sections) {
         this.sections = sections;
     }
 }

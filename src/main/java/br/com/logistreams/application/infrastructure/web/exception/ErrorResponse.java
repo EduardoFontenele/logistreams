@@ -16,7 +16,7 @@ import java.util.Map;
 @NoArgsConstructor
 @Builder
 public class ErrorResponse {
-    public HttpStatus httpStatus;
+    public String httpStatus;
     public String errorMessage;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
