@@ -5,13 +5,11 @@ import br.com.logistreams.application.infrastructure.web.exception.ErrorsEnum;
 import br.com.logistreams.domain.entity.Inventory;
 import br.com.logistreams.domain.ports.input.inventory.CreateInventoryInputPort;
 import br.com.logistreams.domain.repository.InventoryRepository;
-import org.slf4j.Logger;
-
-import java.util.HashSet;
+import br.com.logistreams.utils.LoggerService;
 
 public class CreateInventoryUseCase implements CreateInventoryInputPort {
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(CreateInventoryUseCase.class);
     private final InventoryRepository inventoryRepository;
+    private final LoggerService log = new LoggerService(org.slf4j.LoggerFactory.getLogger(CreateInventoryUseCase.class));
 
     public CreateInventoryUseCase(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
@@ -20,11 +18,11 @@ public class CreateInventoryUseCase implements CreateInventoryInputPort {
     @Override
     public void execute(String inventoryName) {
         if(inventoryRepository.existsByName(inventoryName)) {
-            log.error("[CodeError: {}] - Resource with name '{}' already exists", ErrorsEnum.RESOURCE_ALREADY_EXISTS.getCodeError(), inventoryName);
+            log.conflictError();
             throw new BusinessLogicException(ErrorsEnum.RESOURCE_ALREADY_EXISTS);
         }
 
-        Inventory inventory = new Inventory(null, inventoryName, new HashSet<>());
+        Inventory inventory = new Inventory(inventoryName);
         inventoryRepository.saveNew(inventory);
     }
 }
