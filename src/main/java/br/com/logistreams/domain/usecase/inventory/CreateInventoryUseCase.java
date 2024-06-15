@@ -20,7 +20,7 @@ public class CreateInventoryUseCase implements CreateInventoryInputPort {
     @Override
     public void execute(String inventoryName) {
         if(inventoryRepository.existsByName(inventoryName)) {
-            log.debug("Resource with name '{}' already exists", inventoryName);
+            log.error("[CodeError: {}] - Resource with name '{}' already exists", ErrorsEnum.RESOURCE_ALREADY_EXISTS.getCodeError(), inventoryName);
             throw new BusinessLogicException(ErrorsEnum.RESOURCE_ALREADY_EXISTS);
         }
 
