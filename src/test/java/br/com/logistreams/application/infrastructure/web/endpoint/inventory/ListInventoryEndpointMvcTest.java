@@ -51,7 +51,7 @@ class ListInventoryEndpointMvcTest {
     final String localhost = "http://localhost";
 
     @Test
-    @DisplayName("Given a http request, when page number and size are null and inventory repository is empty, should return a paged response")
+    @DisplayName("Given a HTTP request, when page number and size are null and inventory repository is empty, should return a paged response")
     void test1() throws Exception {
         given(countInventoriesInputPort.execute()).willReturn(0L);
 
