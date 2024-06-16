@@ -36,8 +36,7 @@ public class PagedResponseLinksBuilder<T> {
                 .queryParam(pageSize, queryPageSize)
                 .toUriString());
 
-        // Conditional links based on queryPageNumber and totalPages
-        if (queryPageNumber > 1) { // Check for valid page number (starts from 1)
+        if (queryPageNumber > 1) {
             links.setPrevious(WebMvcLinkBuilder.linkTo(controllerClass)
                     .toUriComponentsBuilder()
                     .queryParam(pageNumber, queryPageNumber - 1)
