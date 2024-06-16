@@ -58,7 +58,7 @@ class InventoryRepositoryImplTest {
     @Test
     @DisplayName("Given a valid inventory, when saveNew, should save the entity and return successfully")
     public void testSaveNew_ValidInventory() throws Exception {
-        Inventory inventory = new Inventory(null, "New Inventory", null);
+        Inventory inventory = new Inventory(null, "New Inventory");
         InventoryEntity expectedEntity = new InventoryEntity(null, "New Inventory", null);
         when(inventoryMapper.toEntity(inventory)).thenReturn(expectedEntity);
 

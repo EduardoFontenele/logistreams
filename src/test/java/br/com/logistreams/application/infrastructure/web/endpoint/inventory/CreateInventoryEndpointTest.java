@@ -1,7 +1,6 @@
-package br.com.logistreams.application.infrastructure.web.endpoint;
+package br.com.logistreams.application.infrastructure.web.endpoint.inventory;
 
 import br.com.logistreams.application.infrastructure.web.dto.input.InventoryInputDTO;
-import br.com.logistreams.application.infrastructure.web.endpoint.inventory.CreateInventoryEndpoint;
 import br.com.logistreams.application.infrastructure.web.exception.DefaultMessages;
 import br.com.logistreams.application.infrastructure.web.exception.ErrorsEnum;
 import br.com.logistreams.domain.ports.input.inventory.CreateInventoryInputPort;
