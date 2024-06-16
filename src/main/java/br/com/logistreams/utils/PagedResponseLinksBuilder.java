@@ -16,14 +16,12 @@ public class PagedResponseLinksBuilder<T> {
         String pageNumber = "page_number";
         String pageSize = "page_size";
 
-        // Use query parameters directly for self link
         links.setSelf(WebMvcLinkBuilder.linkTo(controllerClass)
                 .toUriComponentsBuilder()
                 .queryParam(pageNumber, queryPageNumber)
                 .queryParam(pageSize, queryPageSize)
                 .toUriString());
 
-        // Build links based on totalPages and query parameters
         links.setFirst(WebMvcLinkBuilder.linkTo(controllerClass)
                 .toUriComponentsBuilder()
                 .queryParam(pageNumber, 1)
