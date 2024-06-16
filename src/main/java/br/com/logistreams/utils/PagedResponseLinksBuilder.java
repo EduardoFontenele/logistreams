@@ -1,7 +1,6 @@
 package br.com.logistreams.utils;
 
 import br.com.logistreams.application.infrastructure.web.dto.output.Links;
-import org.springframework.data.domain.Page;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
 public class PagedResponseLinksBuilder<T> {
@@ -34,7 +33,7 @@ public class PagedResponseLinksBuilder<T> {
                 .queryParam(pageSize, queryPageSize)
                 .toUriString());
 
-        if (queryPageNumber > 1) {
+        if (queryPageNumber > 1 && totalPages >= queryPageNumber) {
             links.setPrevious(WebMvcLinkBuilder.linkTo(controllerClass)
                     .toUriComponentsBuilder()
                     .queryParam(pageNumber, queryPageNumber - 1)

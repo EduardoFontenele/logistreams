@@ -4,15 +4,14 @@ import br.com.logistreams.application.infrastructure.web.exception.BusinessLogic
 import br.com.logistreams.application.infrastructure.web.exception.ErrorsEnum;
 import org.slf4j.LoggerFactory;
 
-public final class ValidatePageParams {
+public class ValidatePageParams {
     private static final LoggerService log = new LoggerService(LoggerFactory.getLogger(ValidatePageParams.class));
+    public static final int DEFAULT_PAGE_NUMBER = 1;
+    public static final int DEFAULT_PAGE_SIZE = 10;
 
-    public static int validatePageNumber(Integer pageNumber, int totalPages) {
+    public int validatePageNumber(Integer pageNumber, int totalPages) {
         if(pageNumber == null) {
-            return 1;
-        } else if(pageNumber <= 0) {
-            log.validationError(ErrorsEnum.INVALID_PAGE_NUMBER);
-            throw new BusinessLogicException(ErrorsEnum.INVALID_PAGE_NUMBER);
+            return DEFAULT_PAGE_NUMBER;
         } else if(pageNumber > totalPages){
             throw new BusinessLogicException(ErrorsEnum.PAGE_NUMBER_OUT_OF_RANGE);
         } else {
@@ -20,15 +19,9 @@ public final class ValidatePageParams {
         }
     }
 
-    public static int validatePageSize(Integer pageSize) {
+    public int validatePageSize(Integer pageSize) {
         if(pageSize == null) {
-            return 10;
-        } else if(pageSize <= 0) {
-            log.validationError(ErrorsEnum.INVALID_PAGE_SIZE);
-            throw new BusinessLogicException(ErrorsEnum.INVALID_PAGE_SIZE);
-        } else if(pageSize > 30) {
-            log.validationError(ErrorsEnum.INVALID_PAGE_SIZE);
-            throw new BusinessLogicException(ErrorsEnum.INVALID_PAGE_SIZE);
+            return DEFAULT_PAGE_SIZE;
         } else {
             return pageSize;
         }
