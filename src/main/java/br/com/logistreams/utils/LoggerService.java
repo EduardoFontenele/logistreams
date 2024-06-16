@@ -18,11 +18,19 @@ public class LoggerService {
         logger.error(message);
     }
 
-    public void validationError(Map<String, String> validationErrors) {
+    public void validationError(ErrorsEnum errorsEnum, Map<String, String> validationErrors) {
         String message = String.format("[ErrorCode: %d] - %s: %s",
-                ErrorsEnum.INVALID_FIELDS.getCodeError(),
-                ErrorsEnum.INVALID_FIELDS.getErrorMessage(),
+                errorsEnum.getCodeError(),
+                errorsEnum.getErrorMessage(),
                 buildValidationErrorString(validationErrors)
+        );
+        logger.error(message);
+    }
+
+    public void validationError(ErrorsEnum errorsEnum) {
+        String message = String.format("[ErrorCode: %d] - %s",
+                errorsEnum.getCodeError(),
+                errorsEnum.getErrorMessage()
         );
         logger.error(message);
     }

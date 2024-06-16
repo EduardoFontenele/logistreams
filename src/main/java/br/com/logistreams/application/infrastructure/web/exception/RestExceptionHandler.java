@@ -27,17 +27,17 @@ public class RestExceptionHandler {
         }
 
         validationErrorResponse.setFields(validationErrors);
-        loggerService.validationError(validationErrors);
+        loggerService.validationError(ErrorsEnum.INVALID_FIELDS, validationErrors);
         return ResponseEntity.status(ErrorsEnum.INVALID_FIELDS.getHttpStatus().value()).body(validationErrorResponse);
     }
 
     @ExceptionHandler(BusinessLogicException.class)
     public ResponseEntity<ErrorResponse> handle(BusinessLogicException ex) {
         ErrorResponse validationErrorResponse = ErrorResponse.builder()
-                .httpStatus(ErrorsEnum.RESOURCE_ALREADY_EXISTS.getHttpStatus().getReasonPhrase())
-                .errorMessage(ErrorsEnum.RESOURCE_ALREADY_EXISTS.getErrorMessage())
+                .httpStatus(ex.getHttpStatus().getReasonPhrase())
+                .errorMessage(ex.getErrorMessage())
                 .build();
 
-        return ResponseEntity.status(ErrorsEnum.RESOURCE_ALREADY_EXISTS.getHttpStatus().value()).body(validationErrorResponse);
+        return ResponseEntity.status(ex.getHttpStatus().value()).body(validationErrorResponse);
     }
 }
