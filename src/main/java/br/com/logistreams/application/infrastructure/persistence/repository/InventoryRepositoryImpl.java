@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -42,5 +43,11 @@ public class InventoryRepositoryImpl implements InventoryRepository {
     @Override
     public long count() {
         return jpaInventoryRepository.count();
+    }
+
+    @Override
+    public Inventory findById(Long id) {
+        Optional<InventoryEntity> inventoryEntity = jpaInventoryRepository.findById(1L);
+        return inventoryEntity.map(inventoryMapper::toDomain).orElseGet(() -> null);
     }
 }

@@ -3,7 +3,8 @@ package br.com.logistreams.utils;
 import br.com.logistreams.application.infrastructure.web.exception.BusinessLogicException;
 import br.com.logistreams.application.infrastructure.web.exception.ErrorsEnum;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.stereotype.Component;
+@Component
 public class ValidatePageParams {
     private static final LoggerService log = new LoggerService(LoggerFactory.getLogger(ValidatePageParams.class));
     public static final int DEFAULT_PAGE_NUMBER = 1;

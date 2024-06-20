@@ -9,4 +9,5 @@ public interface InventoryRepository {
     void saveNew(Inventory inventory);
     List<Inventory> listInventories(int pageNumber, int pageSize);
     long count();
+    Inventory findById(Long id);
 }
