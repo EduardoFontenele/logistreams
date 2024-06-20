@@ -29,7 +29,7 @@ class InventoryMapperTest {
     @DisplayName("Should map Inventory to InventoryEntity, ignoring null ID")
     void testToEntity_IgnoresNullId() {
         // Given an Inventory with null ID
-        Inventory inventory = new Inventory(null, "Inventory Name", new HashSet<>());
+        Inventory inventory = new Inventory(null, "Inventory Name");
 
         // When mapping to InventoryEntity
         InventoryEntity inventoryEntity = InventoryMapper.INSTANCE.toEntity(inventory);
@@ -42,12 +42,12 @@ class InventoryMapperTest {
     @DisplayName("Should map Inventory to InventoryEntity, handling empty sections")
     void testToEntity_HandlesEmptySections() {
         // Given an Inventory with null sections
-        Inventory inventory = new Inventory(null, "Inventory Name", null);
+        Inventory inventory = new Inventory(null, "Inventory Name");
 
         // When mapping to InventoryEntity
         InventoryEntity inventoryEntity = InventoryMapper.INSTANCE.toEntity(inventory);
 
         // Then the sections in InventoryEntity should be an empty set
-        assertNull(inventoryEntity.getSections());
+        assertNotNull(inventoryEntity.getSections());
     }
 }

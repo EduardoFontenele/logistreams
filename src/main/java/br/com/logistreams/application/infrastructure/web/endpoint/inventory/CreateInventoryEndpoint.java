@@ -1,10 +1,9 @@
-package br.com.logistreams.application.infrastructure.web.endpoint;
+package br.com.logistreams.application.infrastructure.web.endpoint.inventory;
 
 import br.com.logistreams.application.infrastructure.web.dto.input.InventoryInputDTO;
 import br.com.logistreams.domain.ports.input.inventory.CreateInventoryInputPort;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 public class CreateInventoryEndpoint {
     private final CreateInventoryInputPort createInventoryInputPort;
 

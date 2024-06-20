@@ -16,7 +16,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
+import java.util.HashSet;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -58,7 +65,7 @@ class InventoryRepositoryImplTest {
     @Test
     @DisplayName("Given a valid inventory, when saveNew, should save the entity and return successfully")
     public void testSaveNew_ValidInventory() throws Exception {
-        Inventory inventory = new Inventory(null, "New Inventory", null);
+        Inventory inventory = new Inventory(null, "New Inventory");
         InventoryEntity expectedEntity = new InventoryEntity(null, "New Inventory", null);
         when(inventoryMapper.toEntity(inventory)).thenReturn(expectedEntity);
 
@@ -68,4 +75,29 @@ class InventoryRepositoryImplTest {
         Mockito.verify(jpaInventoryRepository).save(expectedEntity);
     }
 
+    @Test
+    @DisplayName("Given a inventory ID, when inventory entity is present, should return inventory")
+    void testFindById_ValidInventory() {
+        Inventory inventory = new Inventory(1L, "Camisas");
+        InventoryEntity inventoryEntity = new InventoryEntity(1L, "Camisas", new HashSet<>());
+
+        given(jpaInventoryRepository.findById(1L)).willReturn(Optional.of(inventoryEntity));
+        given(inventoryMapper.toDomain(inventoryEntity)).willReturn(inventory);
+
+        Inventory foundInventory = inventoryRepository.findById(1L);
+
+        assertNotNull(foundInventory);
+        assertEquals(inventoryEntity.getId(), foundInventory.getId());
+        assertEquals(inventoryEntity.getName(), foundInventory.getName());
+        verify(inventoryMapper, times(1)).toDomain(inventoryEntity);
+    }
+
+    @Test
+    @DisplayName("Given a inventory ID, when inventory entity is not present, should return null")
+    void testFindById_NotFoundInventory() {
+        given(jpaInventoryRepository.findById(1L)).willReturn(Optional.empty());
+        Inventory foundInventory = inventoryRepository.findById(1L);
+        assertNull(foundInventory);
+        verifyNoInteractions(inventoryMapper);
+    }
 }

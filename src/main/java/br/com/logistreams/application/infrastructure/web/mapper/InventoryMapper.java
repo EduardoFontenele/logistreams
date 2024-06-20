@@ -1,16 +1,19 @@
 package br.com.logistreams.application.infrastructure.web.mapper;
 
 import br.com.logistreams.application.infrastructure.persistence.jpa.entity.InventoryEntity;
-import br.com.logistreams.application.infrastructure.persistence.jpa.entity.SectionEntity;
 import br.com.logistreams.application.infrastructure.web.dto.input.InventoryInputDTO;
+import br.com.logistreams.application.infrastructure.web.dto.output.inventory.InventoryOutputDTO;
+import br.com.logistreams.application.infrastructure.web.endpoint.inventory.FindInventoryByIdEndpoint;
+import br.com.logistreams.application.infrastructure.web.endpoint.inventory.ListInventoryEndpoint;
 import br.com.logistreams.domain.entity.Inventory;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 @Mapper
 public abstract class InventoryMapper {
@@ -29,12 +32,36 @@ public abstract class InventoryMapper {
 
         if(inventory.getId() != null) inventoryEntity.setId(inventory.getId());
         inventoryEntity.setId(null);
-
         inventoryEntity.setName(inventory.getName());
 
-        if(inventory.getSections() != null) inventoryEntity.setSections(new HashSet<>());
-        inventoryEntity.setSections(null);
-
         return inventoryEntity;
+    }
+
+    public Inventory toDomain(InventoryEntity entity) {
+        Inventory inventory = new Inventory();
+        inventory.setId(entity.getId());
+        inventory.setName(entity.getName());
+
+        return inventory;
+    }
+
+    public InventoryOutputDTO toInventoryOutputDTO(Inventory inventory) {
+        InventoryOutputDTO result = new InventoryOutputDTO();
+        Map<String, Object> links = new HashMap<>();
+
+        links.put("self", WebMvcLinkBuilder.linkTo(ListInventoryEndpoint.class)
+                .slash(inventory.getId())
+                .toUriComponentsBuilder()
+                .toUriString());
+
+        links.put("inventories", WebMvcLinkBuilder.linkTo(FindInventoryByIdEndpoint.class)
+                .toUriComponentsBuilder()
+                .toUriString());
+
+        result.setId(inventory.getId());
+        result.setName(inventory.getName());
+        result.set_links(links);
+
+        return result;
     }
 }
