@@ -10,16 +10,16 @@ import java.util.Map;
 public class LoggerService {
     private final Logger logger;
 
-    public void conflictError() {
-        String message = String.format("[ErrorCode: %d] - %s",
-                ErrorsEnum.RESOURCE_ALREADY_EXISTS.getCodeError(),
-                ErrorsEnum.RESOURCE_ALREADY_EXISTS.getErrorMessage()
+    public void error(ErrorsEnum errorsEnum) {
+        String message = String.format("[ErrorCode: %d] | %s",
+                errorsEnum.getCodeError(),
+                errorsEnum.getErrorMessage()
         );
         logger.error(message);
     }
 
-    public void validationError(ErrorsEnum errorsEnum, Map<String, String> validationErrors) {
-        String message = String.format("[ErrorCode: %d] - %s: %s",
+    public void error(ErrorsEnum errorsEnum, Map<String, String> validationErrors) {
+        String message = String.format("[ErrorCode: %d] | %s: %s",
                 errorsEnum.getCodeError(),
                 errorsEnum.getErrorMessage(),
                 buildValidationErrorString(validationErrors)
@@ -27,10 +27,11 @@ public class LoggerService {
         logger.error(message);
     }
 
-    public void validationError(ErrorsEnum errorsEnum) {
-        String message = String.format("[ErrorCode: %d] - %s",
+    public void error(ErrorsEnum errorsEnum, String details) {
+        String message = String.format("[ErrorCode: %d] | %s | Details: %s",
                 errorsEnum.getCodeError(),
-                errorsEnum.getErrorMessage()
+                errorsEnum.getErrorMessage(),
+                details
         );
         logger.error(message);
     }
