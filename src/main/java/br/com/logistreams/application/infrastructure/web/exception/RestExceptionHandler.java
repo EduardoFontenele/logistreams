@@ -27,7 +27,7 @@ public class RestExceptionHandler {
         }
 
         validationErrorResponse.setFields(validationErrors);
-        loggerService.validationError(ErrorsEnum.INVALID_FIELDS, validationErrors);
+        loggerService.error(ErrorsEnum.INVALID_FIELDS, validationErrors);
         return ResponseEntity.status(ErrorsEnum.INVALID_FIELDS.getHttpStatus().value()).body(validationErrorResponse);
     }
 
