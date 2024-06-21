@@ -10,4 +10,6 @@ public interface InventoryRepository {
     List<Inventory> listInventories(int pageNumber, int pageSize);
     long count();
     Inventory findById(Long id);
+    boolean existsById(long l);
+    void deleteById(long l);
 }
