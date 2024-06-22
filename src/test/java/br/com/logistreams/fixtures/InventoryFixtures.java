@@ -4,7 +4,7 @@ import br.com.logistreams.application.infrastructure.web.dto.input.InventoryInpu
 import br.com.logistreams.application.infrastructure.web.dto.output.Meta;
 import br.com.logistreams.application.infrastructure.web.dto.output.PagedResponse;
 import br.com.logistreams.application.infrastructure.web.dto.output.inventory.InventoryOutputDTO;
-import br.com.logistreams.application.infrastructure.web.endpoint.inventory.ListInventoryEndpoint;
+import br.com.logistreams.application.infrastructure.web.input.inventory.ListInventoryEndpoint;
 import br.com.logistreams.domain.entity.Inventory;
 import br.com.logistreams.utils.PagedResponseLinksBuilder;
 

@@ -1,7 +1,7 @@
 package br.com.logistreams.utils;
 
 import br.com.logistreams.application.infrastructure.web.dto.output.Links;
-import br.com.logistreams.application.infrastructure.web.endpoint.inventory.ListInventoryEndpoint;
+import br.com.logistreams.application.infrastructure.web.input.inventory.ListInventoryEndpoint;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;

@@ -1,4 +1,4 @@
-package br.com.logistreams.application.infrastructure.web.endpoint.inventory;
+package br.com.logistreams.application.infrastructure.web.input.inventory;
 
 import br.com.logistreams.application.infrastructure.web.dto.input.InventoryInputDTO;
 import br.com.logistreams.application.infrastructure.web.exception.DefaultMessages;

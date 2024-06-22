@@ -1,4 +1,4 @@
-package br.com.logistreams.application.infrastructure.web.endpoint.inventory;
+package br.com.logistreams.application.infrastructure.web.input.inventory;
 
 import br.com.logistreams.application.infrastructure.web.dto.output.Links;
 import br.com.logistreams.application.infrastructure.web.dto.output.Meta;

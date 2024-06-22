@@ -1,4 +1,4 @@
-package br.com.logistreams.application.infrastructure.web.endpoint.inventory;
+package br.com.logistreams.application.infrastructure.web.input.inventory;
 
 import br.com.logistreams.application.infrastructure.web.exception.ErrorsEnum;
 import br.com.logistreams.domain.ports.input.inventory.DeleteInventoryByIdInputPort;
@@ -10,7 +10,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
