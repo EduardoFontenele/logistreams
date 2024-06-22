@@ -50,4 +50,14 @@ public class InventoryRepositoryImpl implements InventoryRepository {
         Optional<InventoryEntity> inventoryEntity = jpaInventoryRepository.findById(1L);
         return inventoryEntity.map(inventoryMapper::toDomain).orElseGet(() -> null);
     }
+
+    @Override
+    public boolean existsById(long id) {
+        return jpaInventoryRepository.existsById(id);
+    }
+
+    @Override
+    public void deleteById(long id) {
+        jpaInventoryRepository.deleteById(id);
+    }
 }
