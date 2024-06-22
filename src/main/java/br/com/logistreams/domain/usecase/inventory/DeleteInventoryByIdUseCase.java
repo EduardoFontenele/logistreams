@@ -20,6 +20,7 @@ public class DeleteInventoryByIdUseCase implements DeleteInventoryByIdInputPort 
         if(inventoryRepository.existsById(id)) {
             inventoryRepository.deleteById(id);
         } else {
+            log.error(ErrorsEnum.RESOURCE_NOT_FOUND);
             throw new BusinessLogicException(ErrorsEnum.RESOURCE_NOT_FOUND);
         }
     }
