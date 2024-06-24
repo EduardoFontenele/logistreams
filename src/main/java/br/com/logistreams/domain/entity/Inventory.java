@@ -5,6 +5,7 @@ import java.util.Set;
 public class Inventory {
     private Long id;
     private String name;
+    private Set<Section> sections;
 
     public Inventory(String name) {
         this.name = name;
@@ -13,6 +14,12 @@ public class Inventory {
     public Inventory(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Inventory(Long id, String name, Set<Section> sections) {
+        this.id = id;
+        this.name = name;
+        this.sections = sections;
     }
 
     public Inventory() {
@@ -33,4 +40,13 @@ public class Inventory {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Set<Section> getSections() {
+        return sections;
+    }
+
+    public void setSections(Set<Section> sections) {
+        this.sections = sections;
+    }
+
 }

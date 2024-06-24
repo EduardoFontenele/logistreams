@@ -1,12 +1,10 @@
 package br.com.logistreams.application.infrastructure.web.mapper;
 
 import br.com.logistreams.application.infrastructure.persistence.jpa.entity.InventoryEntity;
-import br.com.logistreams.application.infrastructure.web.dto.input.InventoryInputDTO;
+import br.com.logistreams.application.infrastructure.web.dto.input.inventory.CreateInventoryDTO;
 import br.com.logistreams.domain.entity.Inventory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,10 +14,10 @@ class InventoryMapperTest {
     void testToDomain_TrimsName() {
         // Given an InventoryInputDTO with leading/trailing spaces
         String nameWithSpaces = "  Inventory Name  ";
-        InventoryInputDTO inventoryInputDTO = new InventoryInputDTO(nameWithSpaces);
+        CreateInventoryDTO createInventoryDTO = new CreateInventoryDTO(nameWithSpaces);
 
         // When mapping to Inventory
-        Inventory inventory = InventoryMapper.INSTANCE.toDomain(inventoryInputDTO);
+        Inventory inventory = InventoryMapper.INSTANCE.toDomain(createInventoryDTO);
 
         // Then the name in Inventory should be trimmed
         assertEquals("Inventory Name", inventory.getName());

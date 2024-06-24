@@ -1,6 +1,7 @@
 package br.com.logistreams.application.infrastructure.persistence.repository;
 
 import br.com.logistreams.application.infrastructure.persistence.jpa.entity.InventoryEntity;
+import br.com.logistreams.application.infrastructure.persistence.jpa.entity.UserEntity;
 import br.com.logistreams.application.infrastructure.persistence.jpa.repository.JpaInventoryRepository;
 import br.com.logistreams.application.infrastructure.web.mapper.InventoryMapper;
 import br.com.logistreams.domain.entity.Inventory;
@@ -66,7 +67,7 @@ class InventoryRepositoryImplTest {
     @DisplayName("Given a valid inventory, when saveNew, should save the entity and return successfully")
     public void testSaveNew_ValidInventory() throws Exception {
         Inventory inventory = new Inventory(null, "New Inventory");
-        InventoryEntity expectedEntity = new InventoryEntity(null, "New Inventory", null);
+        InventoryEntity expectedEntity = new InventoryEntity(null, "New Inventory", null, new UserEntity());
         when(inventoryMapper.toEntity(inventory)).thenReturn(expectedEntity);
 
         inventoryRepository.saveNew(inventory);
@@ -79,7 +80,7 @@ class InventoryRepositoryImplTest {
     @DisplayName("Given a inventory ID, when inventory entity is present, should return inventory")
     void testFindById_ValidInventory() {
         Inventory inventory = new Inventory(1L, "Camisas");
-        InventoryEntity inventoryEntity = new InventoryEntity(1L, "Camisas", new HashSet<>());
+        InventoryEntity inventoryEntity = new InventoryEntity(1L, "Camisas", new HashSet<>(), new UserEntity());
 
         given(jpaInventoryRepository.findById(1L)).willReturn(Optional.of(inventoryEntity));
         given(inventoryMapper.toDomain(inventoryEntity)).willReturn(inventory);

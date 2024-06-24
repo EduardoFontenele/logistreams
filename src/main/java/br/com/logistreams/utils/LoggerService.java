@@ -40,7 +40,7 @@ public class LoggerService {
         StringBuilder sb = new StringBuilder();
         validationErrors.forEach((field, error) -> {
             if(validationErrors.size() > 1) {
-                sb.append(String.format("%s - %s |", field, error));
+                sb.append(String.format("%s - %s | ", field, error));
             } else {
                 sb.append(String.format("%s - %s", field, error));
             }

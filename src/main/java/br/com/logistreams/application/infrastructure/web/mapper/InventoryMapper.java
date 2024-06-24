@@ -1,7 +1,7 @@
 package br.com.logistreams.application.infrastructure.web.mapper;
 
 import br.com.logistreams.application.infrastructure.persistence.jpa.entity.InventoryEntity;
-import br.com.logistreams.application.infrastructure.web.dto.input.InventoryInputDTO;
+import br.com.logistreams.application.infrastructure.web.dto.input.inventory.CreateInventoryDTO;
 import br.com.logistreams.application.infrastructure.web.dto.output.inventory.InventoryOutputDTO;
 import br.com.logistreams.application.infrastructure.web.input.inventory.FindInventoryByIdEndpoint;
 import br.com.logistreams.application.infrastructure.web.input.inventory.ListInventoryEndpoint;
@@ -20,7 +20,7 @@ public abstract class InventoryMapper {
     public static final InventoryMapper INSTANCE = Mappers.getMapper(InventoryMapper.class);
 
     @Mapping(source = "name", target = "name", qualifiedByName = "trimString")
-    public abstract Inventory toDomain(InventoryInputDTO inventoryInputDTO);
+    public abstract Inventory toDomain(CreateInventoryDTO createInventoryDTO);
 
     @Named("trimString")
     String trimString(String name) {

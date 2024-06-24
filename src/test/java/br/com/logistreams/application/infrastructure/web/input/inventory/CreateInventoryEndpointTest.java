@@ -1,6 +1,6 @@
 package br.com.logistreams.application.infrastructure.web.input.inventory;
 
-import br.com.logistreams.application.infrastructure.web.dto.input.InventoryInputDTO;
+import br.com.logistreams.application.infrastructure.web.dto.input.inventory.CreateInventoryDTO;
 import br.com.logistreams.application.infrastructure.web.exception.DefaultMessages;
 import br.com.logistreams.application.infrastructure.web.exception.ErrorsEnum;
 import br.com.logistreams.domain.ports.input.inventory.CreateInventoryInputPort;
@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -20,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CreateInventoryEndpoint.class)
+@AutoConfigureMockMvc(addFilters = false)
 class CreateInventoryEndpointTest {
     @Autowired
     MockMvc mockMvc;
@@ -33,8 +35,8 @@ class CreateInventoryEndpointTest {
     @Test
     @DisplayName("When called a valid InventoryRequest DTO, should execute use case and return 200")
     void test1() throws Exception {
-        InventoryInputDTO inventoryInputDTO = new InventoryInputDTO("Camisas");
-        String json = objectMapper.writeValueAsString(inventoryInputDTO);
+        CreateInventoryDTO createInventoryDTO = new CreateInventoryDTO("Camisas");
+        String json = objectMapper.writeValueAsString(createInventoryDTO);
 
         mockMvc.perform(post("/v1/inventories")
                         .accept(MediaType.APPLICATION_JSON)
@@ -42,14 +44,14 @@ class CreateInventoryEndpointTest {
                         .content(json))
                 .andExpect(status().is2xxSuccessful());
 
-        verify(createInventoryInputPort).execute(inventoryInputDTO.getName());
+        verify(createInventoryInputPort).execute(createInventoryDTO.getName());
     }
 
     @Test
     @DisplayName("When called a invalid InventoryRequest DTO, should execute use case and return 400")
     void test2() throws Exception {
-        InventoryInputDTO inventoryInputDTO = new InventoryInputDTO("");
-        String json = objectMapper.writeValueAsString(inventoryInputDTO);
+        CreateInventoryDTO createInventoryDTO = new CreateInventoryDTO("");
+        String json = objectMapper.writeValueAsString(createInventoryDTO);
 
         mockMvc.perform(post("/v1/inventories")
                         .accept(MediaType.APPLICATION_JSON)

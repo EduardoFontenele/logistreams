@@ -1,6 +1,6 @@
 package br.com.logistreams.fixtures;
 
-import br.com.logistreams.application.infrastructure.web.dto.input.InventoryInputDTO;
+import br.com.logistreams.application.infrastructure.web.dto.input.inventory.CreateInventoryDTO;
 import br.com.logistreams.application.infrastructure.web.dto.output.Meta;
 import br.com.logistreams.application.infrastructure.web.dto.output.PagedResponse;
 import br.com.logistreams.application.infrastructure.web.dto.output.inventory.InventoryOutputDTO;
@@ -12,12 +12,12 @@ public class InventoryFixtures {
     private static final PagedResponseLinksBuilder<InventoryOutputDTO> pagedResponseLinksBuilder =
             new PagedResponseLinksBuilder<>(ListInventoryEndpoint.class);
 
-    public static InventoryInputDTO gimmeValidInventoryInputDto() {
-        return new InventoryInputDTO("Camisetas");
+    public static CreateInventoryDTO gimmeValidInventoryInputDto() {
+        return new CreateInventoryDTO("Camisetas");
     }
 
-    public static InventoryInputDTO gimmeInvalidInventoryInputDtoEmptyName() {
-        return new InventoryInputDTO("");
+    public static CreateInventoryDTO gimmeInvalidInventoryInputDtoEmptyName() {
+        return new CreateInventoryDTO("");
     }
 
     public static Inventory gimmeValidInventoryDomain() {
