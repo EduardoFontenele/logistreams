@@ -7,12 +7,15 @@ import br.com.logistreams.application.adapters.web.dto.output.inventory.ListInve
 import br.com.logistreams.application.adapters.web.exception.BusinessLogicException;
 import br.com.logistreams.application.adapters.web.exception.ErrorsEnum;
 import br.com.logistreams.application.adapters.web.mapper.InventoryMapper;
+import br.com.logistreams.application.adapters.web.security.authentication.UsernamePwdAuthentication;
 import br.com.logistreams.application.core.ports.input.inventory.CountInventoriesInputPort;
 import br.com.logistreams.application.core.ports.input.inventory.ListInventoriesInputPort;
 import br.com.logistreams.utils.PagedResponseLinksBuilder;
 import br.com.logistreams.utils.ValidatePageParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +38,11 @@ public class ListInventoryEndpoint {
             @RequestParam(value = "page_number", required = false) Integer pageNumber,
             @RequestParam(value = "page_size", required = false) Integer pageSize
     ) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UsernamePwdAuthentication usernamePwdAuthentication = (UsernamePwdAuthentication) authentication;
+        System.out.println(usernamePwdAuthentication.getName());
+        System.out.println(usernamePwdAuthentication.getCredentials());
+
         if(pageNumber != null && pageNumber <= 0)
             throw new BusinessLogicException(ErrorsEnum.INVALID_PAGE_NUMBER);
         if((pageSize != null && pageSize <= 0) || (pageSize != null && pageSize > 30))

@@ -13,12 +13,11 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -28,9 +27,16 @@ public class UserEntity {
     private String username;
     private String password;
     private String email;
+
     @CreationTimestamp
     private LocalDate registeredAt;
 
     @OneToMany
-    private Set<InventoryEntity> inventories;
+    private final Set<InventoryEntity> inventories = new HashSet<>();
+
+    public UserEntity(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 }
