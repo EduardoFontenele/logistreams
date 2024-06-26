@@ -1,6 +1,6 @@
 package br.com.logistreams.utils;
 
-import br.com.logistreams.application.infrastructure.web.exception.BusinessLogicException;
+import br.com.logistreams.application.adapters.web.exception.BusinessLogicException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

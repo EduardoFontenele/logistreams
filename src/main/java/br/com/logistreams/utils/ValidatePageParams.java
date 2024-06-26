@@ -1,7 +1,7 @@
 package br.com.logistreams.utils;
 
-import br.com.logistreams.application.infrastructure.web.exception.BusinessLogicException;
-import br.com.logistreams.application.infrastructure.web.exception.ErrorsEnum;
+import br.com.logistreams.application.adapters.web.exception.BusinessLogicException;
+import br.com.logistreams.application.adapters.web.exception.ErrorsEnum;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 @Component

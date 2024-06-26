@@ -1,15 +1,15 @@
 package br.com.logistreams.fixtures;
 
-import br.com.logistreams.application.infrastructure.web.dto.input.inventory.CreateInventoryDTO;
-import br.com.logistreams.application.infrastructure.web.dto.output.Meta;
-import br.com.logistreams.application.infrastructure.web.dto.output.PagedResponse;
-import br.com.logistreams.application.infrastructure.web.dto.output.inventory.InventoryOutputDTO;
-import br.com.logistreams.application.infrastructure.web.input.inventory.ListInventoryEndpoint;
-import br.com.logistreams.domain.entity.Inventory;
+import br.com.logistreams.application.adapters.web.dto.input.inventory.CreateInventoryDTO;
+import br.com.logistreams.application.adapters.web.dto.output.Meta;
+import br.com.logistreams.application.adapters.web.dto.output.PagedResponse;
+import br.com.logistreams.application.adapters.web.dto.output.inventory.ListInventoryDTO;
+import br.com.logistreams.application.adapters.web.controller.inventory.ListInventoryEndpoint;
+import br.com.logistreams.application.core.domain.Inventory;
 import br.com.logistreams.utils.PagedResponseLinksBuilder;
 
 public class InventoryFixtures {
-    private static final PagedResponseLinksBuilder<InventoryOutputDTO> pagedResponseLinksBuilder =
+    private static final PagedResponseLinksBuilder<ListInventoryDTO> pagedResponseLinksBuilder =
             new PagedResponseLinksBuilder<>(ListInventoryEndpoint.class);
 
     public static CreateInventoryDTO gimmeValidInventoryInputDto() {
@@ -27,9 +27,9 @@ public class InventoryFixtures {
         return obj;
     }
 
-    public static PagedResponse<InventoryOutputDTO> gimmeValidEmptyPagedResponse() {
-        PagedResponse<InventoryOutputDTO> response = new PagedResponse<>();
-        response.setData(new InventoryOutputDTO[] {});
+    public static PagedResponse<ListInventoryDTO> gimmeValidEmptyPagedResponse() {
+        PagedResponse<ListInventoryDTO> response = new PagedResponse<>();
+        response.setData(new ListInventoryDTO[] {});
         response.setMeta(Meta.builder()
                 .totalRecords(0)
                 .currentPage(1)

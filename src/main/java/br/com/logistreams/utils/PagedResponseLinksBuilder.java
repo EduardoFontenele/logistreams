@@ -1,6 +1,6 @@
 package br.com.logistreams.utils;
 
-import br.com.logistreams.application.infrastructure.web.dto.output.Links;
+import br.com.logistreams.application.adapters.web.dto.output.Links;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
 public class PagedResponseLinksBuilder<T> {
